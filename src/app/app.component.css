@@ -1,3 +1,11 @@
 .container {
   margin-top: 30px;
 }
+
+li.even {
+  color: green;
+}
+
+li.odd {
+  color: red;
+}
