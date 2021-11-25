@@ -1,7 +1,9 @@
 import {
   Directive,
   ElementRef,
+  HostBinding,
   HostListener,
+  Input,
   OnInit,
   Renderer2,
 } from "@angular/core";
@@ -10,9 +12,15 @@ import {
   selector: "[appBetterHightlight]",
 })
 export class BetterHightlightDirective implements OnInit {
+  @Input() defaultColor: string = "transparent";
+  @Input("appBetterHightlight") highLightColor: string = "blue";
+  @HostBinding("style.backgroundColor") backgroundColor: string;
+
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
+    this.backgroundColor = this.defaultColor;
+
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       "background-color",
@@ -24,7 +32,7 @@ export class BetterHightlightDirective implements OnInit {
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       "background-color",
-      "blue"
+      this.highLightColor
     );
   }
 
@@ -32,7 +40,7 @@ export class BetterHightlightDirective implements OnInit {
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       "background-color",
-      "transparent"
+      this.defaultColor
     );
   }
 }
